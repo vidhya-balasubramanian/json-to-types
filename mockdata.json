@@ -1,0 +1,47 @@
+{
+  "_id": "60bdad1829215f7bf48d213a1",
+  "vendorCode": "bbc",
+  "country": "IND",
+  "title": "Title of the post",
+  "link": null,
+  "commentCount": 12,
+  "reactionsCount": 1,
+  "saveCount": 1,
+  "shareCount": 0,
+  "postType": "post",
+  "status": "published",
+  "isAnonymous": false,
+  "member": {
+    "id": "61541dac320ee700147a267f",
+    "userName": "Dr Pooja Marathe",
+    "userImage": "https://cdn-sp.babychakra.com/users/original/2307489/profile_6268e768bd51c.jpeg"
+  },
+  "group": {
+    "id": "61541dac320ee700147a287f",
+    "name": "New Parents",
+    "postVisibility": "member"
+  },
+  "media": [
+    {
+      "mediaType": "image"
+    },
+    {
+      "mediaType": "image",
+      "url": "https://cdn-sp.babychakra.com/feedpost/original/feedpost_587627a85a564489.jpeg"
+    }
+  ],
+  "contentMapping": [
+    {
+      "title": "Nitin Sadaphule",
+      "entityType": "member",
+      "entityId": "61541dac320ee700147a267f",
+      "deeplink": "http://app.babychakra.com/web/aHR0cHM6Ly9zaG9wLmJhYnljaGFrcmEuY29tL2NvbGxlY3Rpb24vYmFieWNoYWtyYQ=="
+    }
+  ],
+  "tags": [
+    {
+      "id": "61541dac320ee700147a287f",
+      "name": "#hashtag"
+    }
+  ]
+}

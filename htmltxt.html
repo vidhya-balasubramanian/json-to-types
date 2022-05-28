@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Page Title</title>
+  </head>
+  <body>
+    <div
+      style="display: flex; align-items: center; justify-content: space-between"
+    >
+      <textarea
+        style="outline: none; width: 40%; height: 80vh"
+        id="textareaId"
+        placeholder="Enter your json here"
+      ></textarea>
+      <br />
+      <button type="button" onClick="onFetchKeys()">Fetch Keys</button>
+      <br />
+      <textarea
+        style="outline: none; width: 40%; height: 80vh"
+        id="outputTextareaId"
+        placeholder="Your output"
+        disabled
+      ></textarea>
+    </div>
+    <script>
+      const checkArrayType = (value, resultArr = []) => {
+        for (const x of value) {
+          if (Array.isArray(x)) {
+            resultArr.push(checkArrayType(x));
+          } else if (typeof x !== "object") {
+            resultArr.push(typeof x);
+          } else if (x === null) {
+            resultArr.push("object");
+          } else if (typeof x === "object") {
+            resultArr.push(checkDataType(x));
+          }
+        }
+        const uniqueArray = [...new Set(resultArr)];
+        const returnArray = [];
+        const temp = {};
+        for (let i in uniqueArray) {
+          let currentValue = uniqueArray[i];
+          if (
+            typeof currentValue === "object" &&
+            !Array.isArray(currentValue)
+          ) {
+            for (const [key, value] of Object.entries(currentValue)) {
+              if (!temp[key] || temp[key][value] !== value) {
+                temp[key] = value;
+              }
+            }
+          } else {
+            returnArray.push(currentValue);
+          }
+        }
+        if (Object.keys(temp).length) {
+          returnArray.push(temp);
+        }
+        return returnArray;
+      };
+      const checkDataType = (jsonObj, newObj = {}) => {
+        if (Array.isArray(jsonObj)) {
+          return checkArrayType(jsonObj);
+        } else {
+          for (const [key, value] of Object.entries(jsonObj)) {
+            if (Array.isArray(value)) {
+              newObj[key] = checkArrayType(value);
+            } else if (typeof value !== "object") {
+              newObj[key] = typeof value;
+            } else if (value === null) {
+              newObj[key] = "object";
+            } else if (typeof value === "object") {
+              newObj[key] = checkDataType(value);
+            }
+          }
+          return newObj;
+        }
+      };
+      const onFetchKeys = () => {
+        const elem = document.getElementById("textareaId");
+        if (elem) {
+          const jsonStr = elem.value;
+          try {
+            const json = JSON.parse(jsonStr);
+            const outputTextareaElem =
+              document.getElementById("outputTextareaId");
+            if (outputTextareaElem) {
+              outputTextareaElem.value = JSON.stringify(
+                checkDataType(json),
+                null,
+                "\t"
+              );
+            }
+          } catch (e) {
+            const outputTextareaElem =
+              document.getElementById("outputTextareaId");
+            if (outputTextareaElem) {
+              outputTextareaElem.value = "";
+            }
+            alert("invalid json");
+          }
+        }
+      };
+    </script>
+  </body>
+</html>
